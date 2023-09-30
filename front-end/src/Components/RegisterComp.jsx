@@ -23,6 +23,12 @@ function Registration() {
     postcode: '',
   });
 
+  //popup constants
+  const [showValidationError, setShowValidationError] = useState(false);
+  const [validationErrorMessage, setValidationErrorMessage] = useState('');
+  const [hideValidationPopup, setHideValidationPopup] = useState(false);
+
+
   //constants for handling form navigation
   const [step, setStep] = useState(1);
 
