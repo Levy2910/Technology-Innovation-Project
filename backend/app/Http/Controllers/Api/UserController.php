@@ -46,7 +46,7 @@ class UserController extends Controller
         return response()->JSON([
             'status' => true,
             'message' => 'Account Creation Successful. Please login to Proceed',
-            'token' => $user->createToken('API TOKEN')->plainTextToken
+            'token' => $user->createToken('REGISTER TOKEN')->plainTextToken
         ], 200);
     }
     public function login(Request $request)
@@ -69,7 +69,12 @@ class UserController extends Controller
         // Attempt to log in the user
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
             $user = Auth::user();
-            $token = $user->createToken('API Token')->plainTextToken;
+            
+            // Update the last login time for the user
+            $user->update(['last_login' => now()]);
+
+            // Generate Login token for the user
+            $token = $user->createToken('LOGIN Token')->plainTextToken;
 
             return response()->json([
                 'status' => true,

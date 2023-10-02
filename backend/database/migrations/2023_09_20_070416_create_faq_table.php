@@ -19,7 +19,7 @@ class CreateFaqTable extends Migration
         //
         Schema::create('faq', function (Blueprint $table) {
             $table->increments('id');  //primary key
-            $table->text('question')->unique()->notNull();  
+            $table->string('question', 255)->unique()->notNull();  
             $table->text('answer')->notNull();   
             $table->rememberToken();
             $table->timestamps();

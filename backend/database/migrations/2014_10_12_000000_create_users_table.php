@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('user_id')->unsigned();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('gender'); // Add gender field
@@ -20,11 +20,13 @@ return new class extends Migration
             $table->string('nationality'); // Add nationality field
             $table->integer('postcode');   // Add postcode field
             $table->boolean('role');       // Add role field
+            $table->timestamp('last_login'); // For last login purpose
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
+
     }
 
     /**

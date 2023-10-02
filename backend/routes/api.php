@@ -33,6 +33,8 @@ Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name(
 Route::get('/users', [UserController::class, 'getUsers']);
 Route::delete('users/{id}', [UserController::class, 'deleteUser']);
 // Route::get('/users', [UserController::class, 'getUsers'])->middleware('checkUserRole:1');
+Route::post('/services/sort', 'App\Http\Controllers\ServiceController@sortServices');
+
 
 // Route::middleware(['auth:api', 'checkUserRole:admin'])->group(function () {
 // });
@@ -50,3 +52,4 @@ Route::get('/getFaq/{id}', [FaqController::class, 'getFaq']);
 Route::post('/updateFaq/{id}', [FaqController::class, 'updateFaq']);
 Route::get('/searchFaq/{key}', [FaqController::class, 'searchFaq']);
 Route::post('/chat', [ChatController::class, 'chat']);
+
