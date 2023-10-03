@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LogTestController;
 use App\Http\Controllers\FaqController;
 
+use App\Http\Controllers\Api\ServiceController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -53,3 +55,10 @@ Route::post('/updateFaq/{id}', [FaqController::class, 'updateFaq']);
 Route::get('/searchFaq/{key}', [FaqController::class, 'searchFaq']);
 Route::post('/chat', [ChatController::class, 'chat']);
 
+//yujia
+Route::get('/storeServices', [ServiceController::class, 'storeServices']);
+Route::get('/getServices', [ServiceController::class, 'getServices']);
+Route::post('/searchService', [ServiceController::class, 'searchService']);
+Route::delete('/deleteService/{id}', [ServiceController::class, 'deleteService']);
+Route::post('/addService', [ServiceController::class, 'addService']);
+Route::post('/updateService/{id}', [ServiceController::class, 'updateService']);

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('nationality'); // Add nationality field
             $table->integer('postcode');   // Add postcode field
             $table->boolean('role');       // Add role field
-            $table->timestamp('last_login'); // For last login purpose
+            $table->timestamp('last_login')->nullable(); // For last login purpose
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
