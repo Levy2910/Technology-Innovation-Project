@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('test_result', function (Blueprint $table) {
             // add reason_for_test column
-            $table->text('reason_for_test')->nullable();
+            $table->binary('reason_for_test')->nullable();
         });
     }
 

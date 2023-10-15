@@ -19,6 +19,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'username',
         'name',
         'email',
         'password',
@@ -48,7 +49,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
     ];
     
     use Notifiable;
@@ -59,5 +59,35 @@ class User extends Authenticatable
     {
         $this->notify(new ResetPasswordNotification($token));
     }
+    public function testResults()
+    {
+        return $this->hasMany(TestResult::class, 'user_id', 'user_id');
+    }
+
+    protected $encryptedFields = ['name', 'email', 'password', 'gender', 'age', 'nationality', 'postcode'];
+    public function decryptFields()
+    {
+        foreach ($this->encryptedFields as $field) {
+            if (!empty($this->$field)) {
+                $usercrypt = Key::where('user_id', $this->user_id)->first();
+                $key = $usercrypt->encryption_key;
+                $iv = $usercrypt->iv;
+                $this->$field = openssl_decrypt($this->$field, 'aes-256-cbc', $key, 0, $iv);
+            }
+        }
+    }
+
+    public function encryptFields()
+    {
+        foreach ($this->encryptedFields as $field) {
+            if (!empty($this->$field)) {
+                $usercrypt = Key::where('user_id', $this->user_id)->first();
+                $key = $usercrypt->encryption_key;
+                $iv = $usercrypt->iv;
+                $this->$field = openssl_encrypt($this->$field, 'aes-256-cbc', $key, 0, $iv);
+            }
+        }
+    }
+
 
 }

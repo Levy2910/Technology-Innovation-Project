@@ -11,11 +11,10 @@ use Illuminate\Support\Facades\Validator;
 class ResetPasswordController extends Controller
 {
     // Reset Password
-    public function reset(Request $request)
+    public function reset(Request $request, $user_id)
     {
         // Validate the request data
         $validator = Validator::make($request->all(), [
-            'email' => 'required|string|email',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
@@ -27,25 +26,21 @@ class ResetPasswordController extends Controller
                 'errors' => $validator->errors(),
             ], 422); // HTTP status code 422 for validation errors
         }
-        // Check if the user with the provided email exists
-        $user = User::where('email', $request->input('email'))->first();
+
+        // Check if the user with the provided user_id exists
+        $user = User::find($user_id);
         
         if (!$user) {
-            return response()->json(['message' => 'Email not found'], 404);
+            return response()->json(['message' => 'User not found'], 404);
         }
-        // $status = Password::reset(
-        //     $request->only('email', 'password', 'password_confirmation'),
-        //     function ($user, $password) {
-        //         $user->forceFill([
-        //             'password' => bcrypt($password),
-        //         ])->save();
-        //     }
-        // );
+
+        // Update the user's password
         $user->password = Hash::make($request->input('password'));
         $user->save();
-        return response()->JSON([
+        
+        return response()->json([
             'status' => true,
-            'message' => 'Password Change Successful',
+            'message' => 'Password change successful',
         ], 200);
     }
 }

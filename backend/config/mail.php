@@ -36,14 +36,13 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'url' => env('MAIL_URL'),
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+            'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+            'port' => env('MAIL_PORT', 465),
+            'encryption' => env('MAIL_ENCRYPTION'),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
-            'local_domain' => env('MAIL_EHLO_DOMAIN'),
+            'auth_mode' => null
         ],
 
         'ses' => [
@@ -99,7 +98,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'karkiashmin1996@gmail.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'yxie0629@gmail.com'),
         'name' => env('MAIL_FROM_NAME', 'Admin'),
     ],
 

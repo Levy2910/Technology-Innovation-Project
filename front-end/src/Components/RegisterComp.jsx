@@ -12,6 +12,7 @@ import RegResult from './RegResult';
 function Registration() {
   //form data state
   const [formData, setFormData] = useState({
+    username: '',
     firstName: '',
     lastName: '',
     email: '',
@@ -125,6 +126,7 @@ function Registration() {
     }
     //collate request data
     const requestData = {
+      username: formData.username,
       name: formData.firstName + ' ' + formData.lastName, 
       email: formData.email,
       password: formData.password,

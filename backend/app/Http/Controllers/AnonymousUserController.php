@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AnonymousUser;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class AnonymousUserController extends Controller
 {
@@ -28,10 +29,19 @@ class AnonymousUserController extends Controller
                 'message' => 'Welcome to HIV Support Community'
             ]);
         } else {
-            $anonymous_user->update(['last_visited' => now()]);
-            return response()->json([
-                'message' => 'Glad to have you back to HIV Support Community'
-            ]);
+            // Check if the difference between the current time and the last_visited time is more than 1 second
+            $timeDifference = Carbon::now()->diffInSeconds($anonymous_user->created_at);
+
+            if ($timeDifference > 1) {
+                $anonymous_user->update(['last_visited' => now()]);
+                return response()->json([
+                    'message' => 'Glad to have you back to HIV Support Community'
+                ]);
+            } else {
+                return response()->json([
+                    'message' => 'Welcome to HIV Support Community'
+                ]);
+            }
         }
     } 
 }

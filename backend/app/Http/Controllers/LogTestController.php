@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\TestResult;
 use App\Models\User;
+use App\Models\Key;
 use Illuminate\Support\Facades\Date; 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use PDF;
 
 class LogTestController extends Controller
 {
-    //
+    // log test result to the database
     function logTest(Request $req) 
     {   
         // Customise error messages
@@ -48,35 +50,89 @@ class LogTestController extends Controller
             ], 400);
         }      
 
-        // Create a new testResult
+        //create a new testResult
         $testResult = new TestResult;
         $testResult->user_id = $req->input('user_id');
-        $testResult->test_result = $req->input('test_result');
+        $usercrypt = Key::where('user_id', $req->input('user_id'))->first();
+        $key = $usercrypt->encryption_key;
+        $iv = $usercrypt->iv;
+        $testResult->test_result =openssl_encrypt($req->input('test_result'), 'aes-256-cbc', $key, 0, $iv);
         $testResult->test_date = $req->input('test_date');
-        $testResult->risk_exposure = $req->input('risk_exposure');
+        $testResult->risk_exposure =openssl_encrypt($req->input('risk_exposure'), 'aes-256-cbc', $key, 0, $iv);
         $testDate = Date::now()->format('Y-m-d');         //generate date in yy-mm-dd format
         $testResult->test_date = $testDate;  
-        $testResult->reason_for_test = $req->input('reason_for_test');   
+        $testResult->reason_for_test = openssl_encrypt($req->input('reason_for_test'), 'aes-256-cbc', $key, 0, $iv);   
 
-        // save data collected to the database
+
+        //save data collected to the database
         $testResult->save();
-        $user = User::find($testResult->user_id); 
-       // Generate a PDF
-        $pdf = PDF::loadView('pdf.test_result', ['testResult' => $testResult, 'user' => $user]);
 
-        // Customize PDF file name
+        //decrypt from db
+        $user = User::find($testResult->user_id); 
+        //get latest entry
+        $result = TestResult::where('user_id', $testResult->user_id)
+    ->orderBy('test_date', 'desc')
+    ->orderBy('test_result_id', 'desc')
+    ->first();
+
+        $user->decryptFields();
+        $result->decryptTestFields();
+        
+        
+        //generate a PDF
+        $pdf = PDF::loadView('pdf.test_result', ['testResult' => $result, 'user' => $user]);
+
+
+        //customize PDF file name
         $pdfFileName = 'test_result_' . $testResult->user_id . '.pdf';
 
        
 
-        // Save the PDF to the public storage directory
+        //save the PDF to the public storage directory
         $pdf->save(storage_path('app/public/pdf/' . $pdfFileName));
 
-        // Return a response with a JSON message that includes the PDF download URL
+        //return a response with a JSON message that includes the PDF download URL
         return [
             'status' => true,
             'message' => 'Test result logged successfully',
             'pdf_url' => url('storage/pdf/' . $pdfFileName),
         ];
     }
-}
+    public function getRiskExposureForPieChart()
+    {
+        //get total
+        $totalEntries = TestResult::count();
+    
+        //get risk exposure
+        $riskExposureData = TestResult::select('user_id', 'risk_exposure')
+            ->get();
+    
+        //decrypt and count
+        $count = [];
+        foreach ($riskExposureData as $record) {
+            $usercrypt = Key::where('user_id', $record->user_id)->first();
+            $key = $usercrypt->encryption_key;
+            $iv = $usercrypt->iv;
+            $decryptedRiskExposure = openssl_decrypt($record->risk_exposure, 'aes-256-cbc', $key, 0, $iv);
+    
+            //count
+            if (isset($count[$decryptedRiskExposure])) {
+                $count[$decryptedRiskExposure]++;
+            } else {
+                $count[$decryptedRiskExposure] = 1;
+            }
+        }
+    
+        //calc percentage
+        $pieChartData = [];
+        foreach ($count as $riskExposure => $occurrences) {
+            $percentage = ($occurrences / $totalEntries) * 100;
+            $pieChartData[] = [
+                'label' => $riskExposure,
+                'percentage' => round($percentage, 2) 
+            ];
+        }
+    
+        return response()->json($pieChartData);
+    }
+}    

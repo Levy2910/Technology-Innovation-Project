@@ -19,6 +19,8 @@ function Navbar() {
       localStorage.removeItem('password');
       localStorage.removeItem('email');
       localStorage.removeItem('userId');
+      localStorage.removeItem('username');
+
       navigate('/login');
     }
     const user = localStorage.getItem('token');

@@ -6,6 +6,8 @@ import "../Css/Profile.css"
 
 
 function Profile() {
+    const user_id = localStorage.getItem('userId');
+    
     const [user, setUser] = useState({
         name: localStorage.getItem('name') || '',
         email: localStorage.getItem('email') || '',
@@ -28,20 +30,19 @@ function Profile() {
     // Function to handle form submission
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const user_id = localStorage.getItem('userId')
+        const user_id = localStorage.getItem('userId');
       
         try {
           const response = await axios.post(`http://localhost:8000/api/users/${user_id}`, {
-            name: user.name,
+            name: user.name, 
             email: user.email,
             gender: user.gender,
             nationality: user.nationality,
-            password: user.password,
             postcode: user.postcode,
-            age: user.age
+            password: user.password,
+            age: user.age,
           });
       
-          console.log(response);
           // Assuming your API responds with updated user data
           const updatedUserData = response.data.user;
       

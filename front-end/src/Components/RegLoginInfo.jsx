@@ -10,6 +10,18 @@ function RegLoginInfo({ formData, handleInputChange, nextStep, validationErrors 
     <div className="form registration-form">
       <h2>Account Information</h2>
       <form onSubmit={nextStep}>
+      <div className="form-group">
+  <label htmlFor="username">Username:</label>
+  <input
+    type="text"
+    id="username"
+    name="username"
+    value={formData.username}
+    onChange={handleInputChange}
+    required
+    className="form-input"
+  />
+</div>
         <div className="form-group">
           {validationErrors.firstName && (
             <p className="error-message">{validationErrors.firstName}</p>
