@@ -33,7 +33,7 @@ function WelcomeMessage() {
     }, [])
 
     return (
-        <div className="welcome-message"> {message} </div>
+        <h2 className="welcome-message"> {message} </h2>
     )
 }
 
