@@ -1,0 +1,80 @@
+/*
+Chart Component CSS Styles 
+Junaid Saleem 103824753
+Last edited 15/10/2023
+*/
+.chart-container {
+    flex: 1;
+    padding: 1rem;
+    margin: 1rem;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    height: auto;
+    width: 40%;
+}
+
+.chart-speedo-container {
+    flex: 1;
+    padding: 1rem;
+    margin: 1rem;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    height: auto;
+    width: 40%;
+    text-align: center;
+}
+
+.chart-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+.chart-subtitle {
+    font-size: 16px;
+    font-weight: normal;
+    color: #777;
+}
+
+.chart-main {
+    display: flex;
+    flex-wrap: wrap; /* Allow charts to wrap to the next row on smaller screens */
+    justify-content: space-between; /* Space charts evenly */
+}
+
+.search-bar {
+    width: 40%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f5f5f5;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.search-bar::placeholder {
+    color: #999;
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: #007bff; /* Change border color when focused */
+    background-color: #fff; /* Change background color when focused */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle box shadow */
+}
+
+.centered-chart {
+    margin-top: 50px;
+    display: inline-block;
+    vertical-align: middle;
+}
+  
+  
+  

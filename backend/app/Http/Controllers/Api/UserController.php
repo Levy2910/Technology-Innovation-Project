@@ -56,6 +56,7 @@ class UserController extends Controller
             'postcode' => openssl_encrypt($request->input('postcode'), 'aes-256-cbc', $key, 0, $iv),
             'role' => 0, // role is 0 by default for user registration indicating a normal user
             'last_login' => now(),
+            
         ]);
         //create key table row with user id key and iv
         $usercrypt = Key::create([

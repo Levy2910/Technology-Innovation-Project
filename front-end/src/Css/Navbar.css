@@ -6,7 +6,7 @@ Last edited 14/09/2023*/
   color: var(--textColor);
   padding: 1em 0; /* Adjust padding for better spacing */
   width: 100%;
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
@@ -72,6 +72,7 @@ Last edited 14/09/2023*/
   border-right: 2px solid var(--primaryBackgroundColor); /* Add a border style (e.g., solid) */
   padding: 10px 20px;
   cursor: pointer;
+  border-radius: 5px;
   transition: background-color 0.3s ease; /* Add a smooth transition effect */
 }
 

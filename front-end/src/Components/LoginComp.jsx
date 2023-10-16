@@ -72,8 +72,11 @@ function Login() {
         const postcode = response.data.user.postcode;
         const name = response.data.user.name;
         const user_id = response.data.user.user_id;
+        const user_role = response.data.user.role;
 
         const email = response.data.user.email;
+
+        localStorage.setItem("user_role", user_role);
 
         localStorage.setItem("token", token);
 
@@ -95,7 +98,12 @@ function Login() {
 
         localStorage.setItem("userId", user_id);
 
+        if (user_role == 1){
+          navigate('/admin')
+        }
+        else{
         navigate("/");
+        }
       }
     } catch (error) {
       //err

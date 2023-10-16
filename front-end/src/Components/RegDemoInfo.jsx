@@ -77,7 +77,7 @@ function RegDemoInfo({ formData, handleInputChange, handleSubmit, prevStep, next
             className="form-input"
           />
         </div>
-        <p>*Fields labelled in italics are optional.</p>
+        <p>*Fields marked with * are optional.</p>
         <div>
         <button type="button" onClick={prevStep} className="login-button">
             Back

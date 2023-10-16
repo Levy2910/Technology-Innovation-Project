@@ -2,7 +2,7 @@
 Le Vy Cao 104201234
 Last edited 14/09/2023*/
 .slideshow-container {
-    margin-top: 60px; /* Add margin to push content below the fixed navbar */
+    margin-top: 0; /* Add margin to push content below the fixed navbar */
     position: relative;
     max-width: 100%;
     overflow: hidden;

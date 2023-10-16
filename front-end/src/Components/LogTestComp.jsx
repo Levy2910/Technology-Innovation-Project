@@ -147,7 +147,7 @@ function LogTest() {
               </select>
             </div>
             <div className="form-group">
-              <label htmlFor="reasonForTest">Reason for Testing</label>
+              <label htmlFor="reasonForTest">Reason for Testing*</label>
               <textarea
                 id="reasonForTest"
                 name="reasonForTest"
@@ -183,7 +183,7 @@ function LogTest() {
                 <option value="no">No</option>
               </select>
             </div>
-            <p>*Fields labelled in italics are optional.</p>
+            <p>*Fields marked with * are optional.</p>
             <div className="form-button-group">
               <button type="submit" className="login-button">
                 Submit

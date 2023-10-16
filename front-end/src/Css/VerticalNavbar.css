@@ -1,0 +1,43 @@
+/*Admin Main page
+Junaid Saleem 103824753
+Last edited 24/09/2023*/
+/* Apply styles to the entire sidebar */
+#sidebar {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    background-color: #333;
+    padding: 20px;
+    transition: all 0.3s;
+  }
+  
+  /* Style the sidebar header */
+  .sidebar-header h3 {
+    color: white;
+  }
+  
+  /* Style the sidebar links */
+  .list-unstyled li {
+    padding: 10px;
+  }
+  
+  .list-unstyled li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .list-unstyled li a:hover {
+    background-color: #555;
+  }
+  
+  /* Media query for responsiveness */
+  @media (max-width: 768px) {
+    #sidebar {
+      width: 100%;
+      height: auto;
+    }
+  }
+  

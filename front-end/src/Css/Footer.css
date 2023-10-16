@@ -5,6 +5,7 @@ Last edited 14/09/2023*/
     background-color: var(--primaryBackgroundColor);
     color: var(--textColor);
     padding: 2rem;
+    position: relative;
     display: flex;
     flex-direction: column; /* Set the direction to column */
     justify-content: space-between;
