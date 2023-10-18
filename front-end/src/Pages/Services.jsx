@@ -55,10 +55,12 @@ function ServicesPage() {
       <div className="services">
         <div className="topRow">
           <div className="top">
-            <Image />
+          <div className="servicestext">
+          <Header />
           </div>
-          <div className="top">
-            <Header />
+          <div className='servicesimage'>
+          <Image />
+          </div>
           </div>
         </div>
         <div className="bottomRow">

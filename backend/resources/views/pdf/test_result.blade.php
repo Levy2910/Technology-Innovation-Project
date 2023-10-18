@@ -53,6 +53,7 @@
         <!-- Display user information and test result data in a single section -->
         <div class="info">
             <p><strong>Name:</strong> {{ $user->name }}</p>
+            <p><strong>Email:</strong> {{ $user->email }}</p>
             <p><strong>Gender:</strong> {{ $user->gender }}</p>
             <p><strong>Nationality:</strong> {{ $user->nationality }}</p>
             <p><strong>Age:</strong> {{ $user->age }}</p>

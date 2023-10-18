@@ -2,7 +2,7 @@
 Le Vy Cao 104201234
 Last edited 15/09/2023*/
 .faq {
-    margin-top: 6em; /* Adjust the top margin */
+    margin-top: 0; /* Adjust the top margin */
     padding: 1em;
     overflow-y: auto; /* Use 'auto' for vertical scrolling only */
     background: #f9f9f9; /* Background color */

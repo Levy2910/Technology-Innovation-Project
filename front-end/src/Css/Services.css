@@ -1,9 +1,24 @@
 /*CSS for services page
 Justin Li 104138316
 Last edited 21/09/2023*/
-  .header {
+  .top {
     text-align: center;
-    margin: 20px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 5%;
+    display:flex;
+    align-items: center;
+    line-height: 1.6em;
+    
+  }
+  .top .servicesimage{
+    width:50%;
+    padding: 1em;
+  }
+  .top .servicestext{
+    width:50%;
+    padding:1em;
   }
   
   .header-text {
@@ -17,6 +32,8 @@ Last edited 21/09/2023*/
     align-items: center;
     margin-top: 0;
     padding: 2em;
+    background-color:rgb(230, 228, 228);
+    color: var(--primaryBackgroundColor);
   }
   
   .topRow {
@@ -42,14 +59,11 @@ Last edited 21/09/2023*/
   }
   
   #servicesPic {
-    max-width: 60%; 
-    max-height: 60%; 
     box-sizing: border-box;
     border-radius: 8px;
-  }
-  #servicesImageContainer {
-    border-radius: 8px;
-    padding-top: 20px;
+    width:70%;
+    height:70%;
+
   }
 
   
@@ -59,6 +73,9 @@ Last edited 21/09/2023*/
     box-sizing: border-box;
     overflow-y: auto;
     height: 20em;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    line-height: 1.6em;
   }
   
   .list-item {
